@@ -60,6 +60,17 @@ app.post('/upload_commodity', upload.single('file'), function(req, res, next){
 })
 });
 
+// 部落格照片
+app.post('/upload_blog', upload.single('file'), function(req, res, next){
+  fs.rename(req.file.path, "./public/uploads/" + req.file.originalname, function(err) {
+    if (err) {
+        throw err;
+    }
+    console.log('good!');
+    res.redirect('http://localhost:3001/blog_admin')
+})
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
